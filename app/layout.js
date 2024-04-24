@@ -14,7 +14,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      
+      <head>
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/icon.jpg" sizes="192x192" />
+      </head>
       <body className={inter.className} >
       <NextAuthSessionProvider>
         <div className="mx-6 md:mx-16">
