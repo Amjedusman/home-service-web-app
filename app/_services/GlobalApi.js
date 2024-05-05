@@ -154,6 +154,30 @@ const GetUserBookingHistory=async(userEmail)=>{
       return result;
 }
 
+const getAllServiceList=async()=>{
+  const query=gql`
+  query getServiceList {
+    serviceLists {
+      name
+      phoneNo
+      email
+      date
+      conatctPerson
+      category {
+        name
+        icon {
+          url
+        }
+      }
+    }
+  }
+  
+  `
+  const result=await request(MASTER_URL,query)
+      
+      return result;
+}
+
 export default{
     getCategory,
     getAllBusinessList,
@@ -161,7 +185,8 @@ export default{
     getBusinessById,
     createNewBooking,
     BusinessBookedSlot,
-    GetUserBookingHistory
+    GetUserBookingHistory,
+    getAllServiceList
 }
 
 

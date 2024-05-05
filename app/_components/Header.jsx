@@ -30,10 +30,13 @@ function Header() {
 						<Link href={"/"}>Home</Link>
 					</h2>
 					<h2 className="hover:scale-105 hover:text-primary cursor-pointer">
-						Services
+					<Link href={"/services"}>Services</Link>
 					</h2>
 					<h2 className="hover:scale-105 hover:text-primary cursor-pointer">
-						About Us
+					<Link href={"/aboutus"}>About us</Link>
+					</h2>
+					<h2 className="hover:scale-105 hover:text-primary cursor-pointer">
+					<Link href={"/contactus"}>Contact us</Link>
 					</h2>
 				</div>
 			</div>
@@ -48,7 +51,12 @@ function Header() {
     <DropdownMenuItem>
 		<Link href={'/mybooking'}>My Booking</Link>
 	</DropdownMenuItem>
-	<DropdownMenuItem>Add Work</DropdownMenuItem>
+	<DropdownMenuItem>
+		<Link href={'/addjob'}>Add Job</Link>
+	</DropdownMenuItem>
+	<DropdownMenuItem>
+		<Link href={'/addservice'}>Add Service</Link>
+	</DropdownMenuItem>
     <DropdownMenuItem onClick={()=>signOut()}>Logout</DropdownMenuItem>
   </DropdownMenuContent>
 </DropdownMenu>
