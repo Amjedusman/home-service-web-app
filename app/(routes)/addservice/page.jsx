@@ -4,7 +4,8 @@ import FormService from './_component/formService'
 function addservice() {
   return (
     <div>
-      <FormService/>
+      {/* <FormService/> */}
+      add service moone
     </div>
   )
 }
