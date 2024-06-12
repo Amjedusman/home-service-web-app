@@ -2,7 +2,8 @@
 import GlobalApi from '@/app/_services/GlobalApi';
 import { signIn, useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
-import BusinessInfo from '../_components/Businessinfo';
+import BusinessInfo from "../_components/BusinessInfo";
+
 import SuggestedBusinessList from '../_components/SuggestedBusinessList';
 import BusinessDescription from '../_components/BusinessDescription';
 

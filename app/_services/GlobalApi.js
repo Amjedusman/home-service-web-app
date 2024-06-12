@@ -154,6 +154,26 @@ const GetUserBookingHistory=async(userEmail)=>{
       return result;
 }
 
+const createBusinessList = async (data, imageId) => {
+  const query = gql`
+  mutation CreateBusinessList {
+    createBusinessList(
+      data: {about: "${data.about}", address: "${data.address}", contactPerson: "${data.contactPerson}", category: {connect: {id: "${data.categoryId}"}}, email: "${data.email}", name: "${data.name}", images: {connect: {id: "${imageId}"}}}
+    ){
+      id,
+      name
+    }
+    publishManyBusinessLists(to: PUBLISHED) {
+      count
+    }
+  }
+  
+  `
+  const result = await request(MASTER_URL, query)
+
+  return result;
+}
+
 const getAllServiceList=async()=>{
   const query=gql`
   query getServiceList {
@@ -177,6 +197,53 @@ const getAllServiceList=async()=>{
       
       return result;
 }
+const publishAsset = async (id) => {
+  const query = gql`
+  mutation {
+    publishAsset(where: {id: "${id}"}, to: PUBLISHED) {
+      id
+    }
+  }
+  `
+  const result = await request(MASTER_URL, query)
+
+  return result;
+}
+
+const createAsset = async () => {
+  const query = gql`
+  mutation createAsset {
+    createAsset(data: {}) {
+      id
+      url
+      upload {
+        status
+        expiresAt
+        error {
+          code
+          message
+        }
+        requestPostData {
+          url
+          date
+          key
+          signature
+          algorithm
+          policy
+          credential
+          securityToken
+        }
+      }
+    }
+  }
+  
+  `
+  const result = await request(MASTER_URL, query)
+
+  return result;
+}
+
+
 
 export default{
     getCategory,
@@ -186,7 +253,10 @@ export default{
     createNewBooking,
     BusinessBookedSlot,
     GetUserBookingHistory,
-    getAllServiceList
+  getAllServiceList,
+  createAsset,
+  publishAsset,
+  createBusinessList
 }
 
 

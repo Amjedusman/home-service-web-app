@@ -1,27 +1,60 @@
 "use client";
-import React, { useRef, useState } from 'react';
+import { uploadFile } from "@/lib/uploadFile";
+import React, { useRef, useState } from "react";
+import api from "@/app/_services/GlobalApi";
+
+const categories = [
+  {
+    name: "Cleaning",
+    id: "cluxnqqc90ci007o4in0nfohf",
+  },
+  {
+    name: "Delivery",
+    id: "cluxo2i5s0d0807pn2pf5w6a6",
+  },
+  {
+    name: "Plumbing",
+    id: "cluxody3y0cu407o47y5ckdse",
+  },
+  {
+    name: "Painting",
+    id: "cluxo3tfe0cnz07o4a2fregf9",
+  },
+  {
+    name: "Repair",
+    id: "cluxo54dl0cp507o4g42nmjjx",
+  },
+  {
+    name: "Electrician",
+    id: "cluxofdez0d8u07pn1vmpkszh",
+  },
+];
 
 const ServiceForm = () => {
   const [formData, setFormData] = useState({
-    serviceName: '',
-    contactPerson: '',
-    address: '',
-    about: '',
-    email: '',
-    category: '',
+    name: "",
+    contactPerson: "",
+    address: "",
+    about: "",
+    email: "",
+    categoryId: "",
   });
 
-  const inputFileRef = useRef(null)
+  const inputFileRef = useRef(null);
 
-  const uploadFile = () => {
+  const uploadFileSubmit = async () => {
     const file = inputFileRef.current.files[0];
     if (file) {
       console.log("File name:", file.name);
       console.log("File type:", file.type);
       console.log("File size:", file.size);
       // Implement further file handling logic here (e.g., upload to server)
+      const id = await uploadFile(file);
+
+      return id;
     } else {
       console.log("No file selected");
+      throw new Error("No file selected");
     }
   };
 
@@ -32,23 +65,37 @@ const ServiceForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    uploadFile()
-    console.log(formData);
+    const imageId = await uploadFileSubmit();
+    console.log({
+      ...formData,
+      imageId,
+    });
+
+    const data = await api.createBusinessList(formData, imageId);
+
+    console.log("success");
+    console.log(data);
   };
 
   return (
-    <form className="max-w-lg mx-auto p-4 bg-white shadow-md rounded" onSubmit={handleSubmit}>
+    <form
+      className="max-w-lg mx-auto p-4 bg-white shadow-md rounded"
+      onSubmit={handleSubmit}
+    >
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="serviceName">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="serviceName"
+        >
           Name of Service
         </label>
         <input
           type="text"
-          id="serviceName"
-          name="serviceName"
-          value={formData.serviceName}
+          id="name"
+          name="name"
+          value={formData.name}
           onChange={handleChange}
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           required
@@ -56,7 +103,10 @@ const ServiceForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="contactPerson">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="contactPerson"
+        >
           Name of Contact Person
         </label>
         <input
@@ -71,7 +121,10 @@ const ServiceForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="address">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="address"
+        >
           Address
         </label>
         <input
@@ -86,7 +139,10 @@ const ServiceForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="about">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="about"
+        >
           About
         </label>
         <textarea
@@ -100,7 +156,10 @@ const ServiceForm = () => {
       </div>
 
       <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+        <label
+          className="block text-gray-700 text-sm font-bold mb-2"
+          htmlFor="email"
+        >
           Email
         </label>
         <input
@@ -115,24 +174,26 @@ const ServiceForm = () => {
       </div>
 
       <div className="mb-4">
-        <span className="block text-gray-700 text-sm font-bold mb-2">Category</span>
-        {['cleaning', 'delivery', 'plumbing', 'painting', 'repair'].map((category) => (
-          <label key={category} className="inline-flex items-center mr-4">
+        <span className="block text-gray-700 text-sm font-bold mb-2">
+          Category
+        </span>
+        {categories.map((category) => (
+          <label key={category.id} className="inline-flex items-center mr-4">
             <input
               type="radio"
-              name="category"
-              value={category}
-              checked={formData.category === category}
+              name="categoryId"
+              value={category.id}
+              checked={formData.categoryId === category.id}
               onChange={handleChange}
               className="form-radio"
               required
             />
-            <span className="ml-2">{category.charAt(0).toUpperCase() + category.slice(1)}</span>
+            <span className="ml-2">{category.name}</span>
           </label>
         ))}
       </div>
       <div>
-        <input ref={inputFileRef} type="file"/>
+        <input ref={inputFileRef} type="file" />
       </div>
 
       <div className="flex items-center justify-between">
