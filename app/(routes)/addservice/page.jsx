@@ -1,11 +1,10 @@
 import React from 'react'
-import FormService from './_component/formService'
+import ServiceForm from './_component/ServiceForm'
 
 function addservice() {
   return (
-    <div>
-      {/* <FormService/> */}
-      add service moone
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <ServiceForm />
     </div>
   )
 }
