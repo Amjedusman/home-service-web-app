@@ -47,6 +47,7 @@ function BusinessDetail({params}) {
                 <SuggestedBusinessList business={business}/>
             </div>
         </div>
+        
     </div>
   )
 }
