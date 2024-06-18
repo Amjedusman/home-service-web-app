@@ -38,11 +38,14 @@ const getAllBusinessList=async()=>{
       }
       id
       name
+      reviews {
+        star
+      }
     }
   }
   `
   const result=await request(MASTER_URL,query)
-      
+
       return result;
 }
 
@@ -85,6 +88,13 @@ const getBusinessById=async (id)=>{
       name
       images {
         url
+      }
+      reviews {
+        star
+        reviewText
+        profileImage
+        userName
+        email
       }
     }
   }
@@ -191,6 +201,24 @@ const createServiceList = async (data, imageId) => {
 
   return result;
 }
+const createReview = async (data) => {
+  const query = gql`
+  mutation CreateServiceList {
+    createReview(
+      data: {email: "${data.email}", profileImage: "${data.profileImage}", reviewText: "${data.reviewText}", star: ${data.star}, userName: "${data.userName}", businessList: {connect: {id: "${data.businessId}"}}}
+    ){
+      id,
+    }
+    publishManyReviews(to: PUBLISHED) {
+      count
+    }
+  }
+  
+  `
+  const result = await request(MASTER_URL, query)
+
+  return result;
+}
 
 const getAllServiceList=async()=>{
   const query=gql`
@@ -275,7 +303,8 @@ export default{
   createAsset,
   publishAsset,
   createBusinessList,
-  createServiceList
+  createServiceList,
+  createReview
 }
 
 
