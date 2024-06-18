@@ -173,6 +173,24 @@ const createBusinessList = async (data, imageId) => {
 
   return result;
 }
+const createServiceList = async (data, imageId) => {
+  const query = gql`
+  mutation CreateServiceList {
+    createServiceList(
+      data: {address: "${data.address}", conatctPerson: "${data.contactName}", email: "${data.email}", date: "${data.date}", name: "${data.serviceName}", phoneNo: "${data.phone}", images: {connect: {id: "${imageId}"}}, category: {connect: {id: "${data.categoryId}"}}}
+    ) {
+      id
+    }
+    publishManyServiceLists(to: PUBLISHED) {
+      count
+    }
+  }
+  
+  `
+  const result = await request(MASTER_URL, query)
+
+  return result;
+}
 
 const getAllServiceList=async()=>{
   const query=gql`
@@ -256,7 +274,8 @@ export default{
   getAllServiceList,
   createAsset,
   publishAsset,
-  createBusinessList
+  createBusinessList,
+  createServiceList
 }
 
 

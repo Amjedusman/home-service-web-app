@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 function ServiceList({ serviceList, title }) {
+	console.log(serviceList);
 	return (
 		<div>
 			<div className="font-bold text-[22px]">{title}</div>
