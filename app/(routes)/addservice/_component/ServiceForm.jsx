@@ -38,6 +38,7 @@ export default function ServiceForm() {
   const [formData, setFormData] = useState({
     serviceName: "",
     contactName: "",
+    about:"",
     phone: "",
     address: "",
     email: "",
@@ -120,6 +121,21 @@ export default function ServiceForm() {
       </div>
 
       <div className="mb-4">
+        <label className="block text-sm font-medium mb-1" htmlFor="about">
+          About
+        </label>
+        <input
+          type="text"
+          id="about"
+          name="about"
+          className="w-full px-3 py-2 border border-gray-300 rounded-md"
+          value={formData.about}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
+      <div className="mb-4">
         <label className="block text-sm font-medium mb-1" htmlFor="contactName">
           Contact Person Name
         </label>
@@ -163,6 +179,8 @@ export default function ServiceForm() {
           required
         />
       </div>
+
+      
 
       <div className="mb-4">
         <label className="block text-sm font-medium mb-1" htmlFor="email">
