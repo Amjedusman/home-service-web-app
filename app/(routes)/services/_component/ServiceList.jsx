@@ -1,4 +1,7 @@
+'use client'
+
 import { Button } from "@/components/ui/button";
+import { Calendar, Contact, Mail, Phone } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 
@@ -15,12 +18,12 @@ function ServiceList({ serviceList, title }) {
 					>
 						<div className="flex items-center justify-center">
                             <Image
-                                src={service.category.icon?.url}
+                                src={service.images[0]?.url}
                                 alt={service.name}
-                                width={200}
+                                width={500}
                                 height={200}
-                                className="flex flex-col justify-center items-center gap-2
-                                bg-purple-100 p-5 rounded-lg cursor-pointer "
+                                className="h-[150px] md:h-[200px] 
+                object-cover rounded-lg"
                             />
                         </div>
 						<div className="flex flex-col items-baseline p-3">
@@ -32,10 +35,10 @@ function ServiceList({ serviceList, title }) {
 								{service.category.name}
 							</h2>
 							<h2 className="font-bold text-lg">{service.name}</h2>
-							<h2 className="text-primary">{service.conatctPerson}</h2>
-							<h2 className="text-gray-500 text-sm">{service.phoneNo}</h2>
-							<h2 className="text-gray-500 text-sm">{service.email}</h2>
-							<h2 className="text-gray-500 text-sm">{service.date}</h2>
+							<h2 className="text-primary flex gap-3"><Contact/>{service.conatctPerson}</h2>
+							<h2 className="text-gray-500 text-sm flex gap-3"><Phone/>{service.phoneNo}</h2>
+							<h2 className="text-gray-500 text-sm flex gap-3"><Mail/>{service.email}</h2>
+							<h2 className="text-gray-500 text-sm flex gap-3"><Calendar/>{service.date}</h2>
 							<Button className="rounded-lg mt-3">Book Now</Button>
 						</div>
 					</div>

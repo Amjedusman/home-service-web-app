@@ -37,7 +37,7 @@ function BusinessList({businessList,title}) {
                   </h2>
                   <h2 className="font-bold text-lg">{business.name}</h2>
                   <h2 className="text-primary">{business.contactPerson}</h2>
-                  {business.reviews.length > 0 && (
+                  {business?.reviews?.length > 0 && (
                     <h2 className="text-gray-700">
                       Rating:{" "}
                       {business.reviews.reduce(

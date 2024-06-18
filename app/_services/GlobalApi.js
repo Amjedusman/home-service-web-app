@@ -223,20 +223,24 @@ const createReview = async (data) => {
 const getAllServiceList=async()=>{
   const query=gql`
   query getServiceList {
-    serviceLists {
+  serviceLists {
+    name
+    phoneNo
+    email
+    date
+    conatctPerson
+    category {
       name
-      phoneNo
-      email
-      date
-      conatctPerson
-      category {
-        name
-        icon {
-          url
-        }
+      icon {
+        url
       }
     }
+    images {
+      url
+    }
   }
+}
+
   
   `
   const result=await request(MASTER_URL,query)
