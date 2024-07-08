@@ -30,7 +30,7 @@ function BusinessInfo({business}) {
     <div className='flex flex-col gap-5 items-end'>
       <Button><Share /></Button>
       <h2 className='flex gap-2 text-xl text-primary'><User/>{business.contactPerson}</h2>
-      <h2 className='flex gap-2 text-xl text-gray-500'><Clock/>Available 8:00 AM to 10:00 PM</h2>
+      <h2 className='flex gap-2 text-xl text-gray-500'><Clock/>Available 10:00 AM to 06:30 PM</h2>
 
     </div>
     </div>

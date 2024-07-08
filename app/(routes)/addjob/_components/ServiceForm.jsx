@@ -2,6 +2,7 @@
 import { uploadFile } from "@/lib/uploadFile";
 import React, { useRef, useState } from "react";
 import api from "@/app/_services/GlobalApi";
+import { useRouter } from "next/navigation";
 
 const categories = [
   {
@@ -31,6 +32,7 @@ const categories = [
 ];
 
 const ServiceForm = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     name: "",
     contactPerson: "",
@@ -77,6 +79,8 @@ const ServiceForm = () => {
 
     console.log("success");
     console.log(data);
+    router.push("/");
+
   };
 
   return (
@@ -89,7 +93,7 @@ const ServiceForm = () => {
           className="block text-gray-700 text-sm font-bold mb-2"
           htmlFor="serviceName"
         >
-          Name of Service
+          Name of Job
         </label>
         <input
           type="text"
