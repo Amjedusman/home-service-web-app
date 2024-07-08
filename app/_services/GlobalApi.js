@@ -258,6 +258,7 @@ const getServiceById=async (id)=>{
       about
       address
       date
+      phoneNo
       category {
         name
       }

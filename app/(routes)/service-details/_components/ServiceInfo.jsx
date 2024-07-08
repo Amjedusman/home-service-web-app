@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import { Calendar, Mail, MapPin, Share, User } from 'lucide-react'
+import { Calendar, Mail, MapPin, PhoneCallIcon, Share, User } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
@@ -25,6 +25,8 @@ function ServiceInfo({service}) {
       text-gray-500'><MapPin/>{service.address}</h2>
       <h2 className='flex gap-2 text-lg text-gray-500'>
         <Mail/>{service?.email}</h2>
+        <h2 className='flex gap-2 text-lg text-gray-500'>
+        <PhoneCallIcon/>{service?.phoneNo}</h2>
       
     </div>
     <div className='flex flex-col gap-5 items-end'>
